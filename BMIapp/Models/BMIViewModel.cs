@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BMIapp.Models
 {
-   public class BMIViewModel : INotifyPropertyChanged
+    public class BMIViewModel : INotifyPropertyChanged
     {
         private double _height;
         private double _weight;
@@ -20,9 +20,12 @@ namespace BMIapp.Models
             get => _height;
             set
             {
-                _height = value;
-                OnPropertyChanged();
-                CalculateBMI();
+                if (_height != value)
+                {
+                    _height = value;
+                    OnPropertyChanged();
+                    CalculateBMI();
+                }
             }
         }
 
@@ -31,9 +34,12 @@ namespace BMIapp.Models
             get => _weight;
             set
             {
-                _weight = value;
-                OnPropertyChanged();
-                CalculateBMI();
+                if (_weight != value)
+                {
+                    _weight = value;
+                    OnPropertyChanged();
+                    CalculateBMI();
+                }
             }
         }
 
@@ -42,8 +48,11 @@ namespace BMIapp.Models
             get => _result;
             private set
             {
-                _result = value;
-                OnPropertyChanged();
+                if (_result != value)
+                {
+                    _result = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -52,8 +61,11 @@ namespace BMIapp.Models
             get => _resultText;
             private set
             {
-                _resultText = value;
-                OnPropertyChanged();
+                if (_resultText != value)
+                {
+                    _resultText = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -71,18 +83,12 @@ namespace BMIapp.Models
                 Result = Weight / (heightInMeters * heightInMeters);
 
                 // Determine BMI category
-                if (Result < 16)
-                    ResultText = "Severely Underweight";
-                else if (Result < 17)
-                    ResultText = "Moderately Underweight";
-                else if (Result < 18.5)
-                    ResultText = "Mildly Underweight";
-                else if (Result < 25)
-                    ResultText = "Normal";
-                else if (Result < 30)
-                    ResultText = "Overweight";
-                else
-                    ResultText = "Obese";
+                if (Result < 16) ResultText = "Severely Underweight";
+                else if (Result < 17) ResultText = "Moderately Underweight";
+                else if (Result < 18.5) ResultText = "Mildly Underweight";
+                else if (Result < 25) ResultText = "Normal";
+                else if (Result < 30) ResultText = "Overweight";
+                else ResultText = "Obese";
             }
         }
 
